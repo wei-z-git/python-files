@@ -15,6 +15,7 @@
 #########################################################################
 import random
 
+
 def fn(n):
     i, tmp_list = 0, []
     while True:
@@ -27,5 +28,7 @@ def fn(n):
             break
     # 将列表转成元组返回
     return tuple(tmp_list)
+
+
 n = int(input("请输入整数n:"))
 print(fn(n))

@@ -139,6 +139,6 @@
 
 # print(fn(n))
 
-
-
-print(chr(6))
+# print(chr(6))
+def fn():
+    
