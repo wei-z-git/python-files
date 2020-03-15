@@ -19,18 +19,19 @@ import time
 
 def timmer(func):
     # func = index
-    def inner():
+    def inner(*args, **kwargs):
         start = time.time()
-        func()
+        res = func(*args, **kwargs)
         stop = time.time()
         print("run time is %s" % (stop-start))
+        return res
     return inner
 
 
 @timmer
-def index():
-    time.sleep(3)
-    print("welcome to index")
+def index(name):
+    print("welcome %s to index" % name)
+    return 1111
 
 
-index()
+index("haha")
