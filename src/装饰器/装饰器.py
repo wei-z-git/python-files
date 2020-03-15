@@ -16,6 +16,7 @@
 
 import time
 
+
 def timmer(func):
     # func = index
     def inner():
@@ -30,7 +31,6 @@ def timmer(func):
 def index():
     time.sleep(3)
     print("welcome to index")
-
 
 
 index()
