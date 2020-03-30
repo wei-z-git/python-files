@@ -8,11 +8,12 @@ class FtpClient:
         while True:
             cmd = input('>>:').strip()
             if not cmd:  # if not (cmd is none)
-                continue
-            cmd_l = cmd.split()
-            print(cmd_l)
-            if hasattr(self, cmd_l[0]):  # 判断对象是否有cmd_l的属性
-                func = getattr(self, cmd_l[0])
+                continue  # 为了防止输入空字符
+
+            cmd_list = cmd.split()
+            print(cmd_list)
+            if hasattr(self, cmd_list[0]):  # 判断对象是否有cmd_list的属性
+                func = getattr(self, cmd_list[0])
                 print(func)
                 func()
 
