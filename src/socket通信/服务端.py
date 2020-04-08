@@ -18,6 +18,7 @@ print(conn, client_addr)
 while True:
 
     data = conn.recv(1024)
+    print('收到客户端消息：%s' % data)
     conn.send(data.upper())
 
 # 挂电话
