@@ -15,8 +15,11 @@ conn, client_addr = phone.accept()  # (conn,client_addr)
 print(conn, client_addr)
 
 # 收发消息
-data = conn.recv(1024)
-print(data)
+while True:
+
+    data = conn.recv(1024)
+    conn.send(data.upper())
+
 # 挂电话
 conn.close()
 
