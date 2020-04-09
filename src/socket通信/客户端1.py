@@ -9,7 +9,7 @@ phone.connect(('127.0.0.1', 8080))
 while True:
 
     # 发收消息
-    msg = input('>>>>:')
+    msg = input('>>>>:').strip()
     if not msg:
         continue
     phone.send(msg.encode('utf-8'))

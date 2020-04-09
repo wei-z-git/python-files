@@ -11,18 +11,22 @@ phone.listen(5)
 
 # 等待连接
 print('starting...')
-conn, client_addr = phone.accept()  # (conn,client_addr)
-print(conn, client_addr)
-
-# 收发消息
 while True:
 
-    data = conn.recv(1024)
-    print('收到客户端消息：%s' % data)
-    conn.send(data.upper())
+    conn, client_addr = phone.accept()  # (conn,client_addr)
+    print(client_addr)
 
-# 挂电话
-conn.close()
+    # 收发消息
+    while True:
+        try:
+            data = conn.recv(1024)
+            if not data:
+                break  # 针对linux，防止死循环
+            print('收到客户端消息：%s' % data)
+            conn.send(data.upper())
+        except ConnectionResetError:
+            break
+    conn.close()
 
 # 关机
 phone.close()
