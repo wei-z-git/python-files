@@ -1,6 +1,7 @@
 from socket import AF_INET, SOCK_STREAM, socket
 import subprocess
 import struct
+import json
 
 server = socket(AF_INET, SOCK_STREAM)
 server.bind(('127.0.0.1', 8090))
@@ -22,12 +23,21 @@ while True:
                                    )
             stdout = obj.stdout.read()
             stderr = obj.stderr.read()
+            headers = {
+                'filepath': 'a.txt',
+                'md5': '123xxasd2asdfg',
+                'total_size': len(stdout)+len(stderr)
+            }
+            headers_json = json.dumps(headers)
+            headers_bytes = headers_json.encode('utf-8')
 
-            # 制作固定长度报头，用struct吧totalsize打包成4bytes的
-            total_size = len(stdout)+len(stderr)
-            headers = struct.pack('i', total_size)
+            # 发送报头长度
 
-            conn.send(headers)
+            conn.send(struct.pack('i', len(headers_bytes)))
+
+            # 再发报头
+
+            conn.send(headers_bytes)
             conn.send(stdout)
             conn.send(stderr)
         except ConnectionResetError:
