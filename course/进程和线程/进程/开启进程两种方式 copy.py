@@ -22,7 +22,7 @@ import time
 class MyProcess(Process):
     def __init__(self, name):
         # super引用父类的属性
-        super(MyProcess, self).__init__()
+        super().__init__()
 
         self.name = name
 
