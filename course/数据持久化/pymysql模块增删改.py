@@ -11,8 +11,16 @@ client = pymysql.connect(
 # 游标
 cursor = client.cursor()
 
-sql='insert into t1 values(3,"egon");'
-cursor.execute(sql)
+userinfo=[
+    (3,'alex'),
+    (4,'tom'),
+    (5,'xxx')
+]
+# 增加，采用executemany方法可以更快执行数据
+sql='insert into t1 values(%s,%s);'
+cursor.executemany(sql,userinfo)
+
+# 删除同
 
 client.commit()
 cursor.close()
