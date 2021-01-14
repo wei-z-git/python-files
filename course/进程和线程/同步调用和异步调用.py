@@ -64,8 +64,7 @@ if __name__ == "__main__":
     for i in range(5):
         #1、 某个任务完成后，立马触发一个回调函数，调用handle方法
         #2、 本来obj可以直接通过result直接拿结果，现在一旦task运行结束了 2、立马触发回调函数，把obj传给handle
-        obj = pool.submit(task, i)
-        obj.add_done_callback(handle)
+        pool.submit(task, i).add_done_callback(handle)
 
     pool.shutdown(wait=True)
     print('主')
