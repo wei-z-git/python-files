@@ -24,3 +24,12 @@ if __name__ == "__main__":
         obj=pool.submit(get, url)
         print(obj.result())
         # .add_done_callback(parse)
+
+#超时设置
+#两种超时:float or tuple
+#timeout=0.1 #代表接收数据的超时时间
+#timeout=(0.1,0.2)#0.1代表链接超时  0.2代表接收数据的超时时间
+
+import requests
+respone=requests.get('https://www.baidu.com',
+                     timeout=0.0001)
