@@ -24,7 +24,7 @@ try:
     while s < distance:
         # 如果两者距离不为0，则 移动动作链（动作链是“点击按住”的source）2个单位
         ActionChains(driver).move_by_offset(xoffset=2, yoffset=0).perform()
-        time.sleep(0.2)
+        # time.sleep(0.001)
         s += 2
     
     ActionChains(driver).release().perform()
