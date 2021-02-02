@@ -8,7 +8,7 @@ def parse_page(res):
     print('%s PARSE %s' % (current_thread().getName(), len(res)))
 
 
-def get_page(url, callback=parse_page):
+def get_page(url):
     print('%s GET %s' % (current_thread().getName(), url))
     response = requests.get(url)
     if response.status_code == 200:

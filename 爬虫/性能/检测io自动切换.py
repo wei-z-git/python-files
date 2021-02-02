@@ -1,11 +1,14 @@
-from gevent 
-import requests
 from threading import Thread, current_thread
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
+import requests
+from gevent import joinall, spawn, monkey
+monkey.patch_all()
+
+import sys  # 导入sys模块
+sys.setrecursionlimit(3000) 
 
 
 def parse_page(res):
-    res = res.result()
+    # res = res.result()
     print('%s PARSE %s' % (current_thread().getName(), len(res)))
 
 
@@ -13,7 +16,7 @@ def get_page(url, callback=parse_page):
     print('%s GET %s' % (current_thread().getName(), url))
     response = requests.get(url)
     if response.status_code == 200:
-        return response.text
+        callback(response.text)
 
 
 if __name__ == '__main__':
@@ -24,8 +27,9 @@ if __name__ == '__main__':
 
     ]
 
-    pool = ThreadPoolExecutor(50)
+    tasks = []
     for url in urls:
-        pool.submit(get_page, url).add_done_callback(parse_page)
+        tasks.append(spawn(get_page, url))
+    joinall(tasks)
 
-    pool.shutdown(wait=True)
+
