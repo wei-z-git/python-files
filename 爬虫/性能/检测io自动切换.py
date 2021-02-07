@@ -1,15 +1,12 @@
-from threading import Thread, current_thread
-import requests
 from gevent import joinall, spawn, monkey
 monkey.patch_all()
-
-import sys  # 导入sys模块
-sys.setrecursionlimit(3000) 
+from threading import Thread, current_thread
+import requests
 
 
 def parse_page(res):
     # res = res.result()
-    print('%s PARSE %s' % (current_thread().getName(), len(res)))
+    print('%s PARSE %s' % (current_thread().  getName(), len(res)))
 
 
 def get_page(url, callback=parse_page):
